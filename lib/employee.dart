@@ -13,7 +13,7 @@ class Employee extends Person {
     required this.monthlySalary,
     }): super(name,age){    // I have created a "try" here to make it handle the errors depending of the type of the erorr
       try {
-        if (age<=18) {                    // Req1 from the PDF, 18 or older
+        if (age<18) {                    // Req1 from the PDF, 18 or older
           throw ArgumentError("Age must be 18 or older");          
         }
         if (name.trim().isEmpty) {        // Req2 from the PDF, not empty or white space
@@ -30,6 +30,7 @@ class Employee extends Person {
       } 
     }
 
+
     // Overridding "displayInfo" from person.dart. Will be printed in main 
   @override
   void displayInfo(){
@@ -40,4 +41,24 @@ class Employee extends Person {
     stdout.write("Monthly Salary: \$$monthlySalary\n");
     stdout.write("Yearly Salary: \$${monthlySalary*12}\n");
   }
+
+  // To convert from Employee to JSON
+  Map<String, dynamic> toJson(){
+    return{
+      "name":name,
+      "age":age,
+      "position":position,
+      "monthlySalary":monthlySalary,
+    };
+  }
+
+  // To create Employee from JSON
+  factory Employee.fromJSON(Map<String, dynamic> json){   // factory is as same as function but the different's
+    return Employee.withPosition(                        // factory can handle more complex things,
+      name: json["name"],                               // as you see here, we are handling more complex thing (json) 
+      age: json["age"],                                // without getting any problems 
+      position: json["position"], 
+      monthlySalary: json["monthlySalary"].toDouble(),
+      );
+  }  
 }
