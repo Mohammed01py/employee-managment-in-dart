@@ -14,7 +14,7 @@ class Employee extends Person {   // Req1: Employee that extends Person and adds
     }): super(name,age){    // I have created a "try" here to make it handle the errors depending of the type of the erorr
       try {
         if (age<18) {                    // Req3: 18 or older
-          throw ArgumentError("Age must be 18 or older");          
+          throw ArgumentError("\nAge must be 18 or older\n");          
         }
         if (name.trim().isEmpty) {        // Req4: not empty or white space
           throw ArgumentError("You need to enter a name, don't make it empty");
@@ -54,7 +54,7 @@ class Employee extends Person {   // Req1: Employee that extends Person and adds
   }
 
   // To create Employee from JSON
-  factory Employee.fromJSON(Map<String, dynamic> json){   // factory is as same as function but the different's
+  factory Employee.fromJSON(Map<String, dynamic> json){   // factory is as same as a function but the different's
     return Employee.withPosition(                        // factory can handle more complex things,
       name: json["name"],                               // as you see here, we are handling more complex thing (json) 
       age: json["age"],                                // without getting any problems 

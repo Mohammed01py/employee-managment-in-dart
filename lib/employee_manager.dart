@@ -27,19 +27,19 @@ class EmployeeManager {
 
         // Here we fill every varibles we got from other classes with making sure it's not NULL 
         stdout.write("Enter employee name:\n");
-        String? name = stdin.readLineSync()!;
-        stdout.write("Enter employee age:\n");
-        int age = int.parse(stdin.readLineSync()!);
+        String? nameEntered = stdin.readLineSync()!;
+        stdout.write("Enter employee age:\n"); // Caught Try not working
+        int ageEntered = int.parse(stdin.readLineSync()!);
         stdout.write("Enter employee position:\n");
-        String position = stdin.readLineSync()!;
+        String positionEntered = stdin.readLineSync()!;
         stdout.write("Enter employee monthly salary:\n");
-        double monthlySalary = double.parse(stdin.readLineSync()!);
+        double monthlySalaryEntered = double.parse(stdin.readLineSync()!);
 
         // from "employee.dart" get veribles and name them here as name = name, age = age,... etc
         Employee employee = Employee.withPosition(
-            name: name, age: age, position: position, monthlySalary: monthlySalary);
+            name: nameEntered, age: ageEntered, position: positionEntered, monthlySalary: monthlySalaryEntered);
         employees.add(employee);
-        stdout.write("Employee has been added\r");
+        //stdout.write("Employee has been added\r");
       } catch (e) {
         stdout.write("Error: $e\n");
       }
@@ -77,7 +77,7 @@ class EmployeeManager {
         stdout.write("Sorted by name\n");                       // the user to sort employees by
         break;                                                 // age, name, or salary before printing the report"
       case '2':
-        employees.sort((a, b) => a.age.compareTo(b.age));
+        employees.sort((a, b) => a.age.compareTo(b.age)); // I HAVE AN ERROR HERE
         stdout.write("Sorted by age\n"); 
         break;
       case '3':
@@ -105,7 +105,7 @@ class EmployeeManager {
       case "1":
         stdout.write("Type position to filter by: ");
         String? position = stdin.readLineSync();                // Here's the "position" filter from BONUS (3) req
-        var filtered =  //(Err3) as you see under my comment. I made it automatcly and got a lot of time to find how I created it
+        var filtered =  // (Err3) as you see under my comment. I made it automatcly and got a lot of time to find how I created it
             employees.where((element) => element.position == position).toList();  // BONUS (3): Add filtering feature:
         if (filtered.isEmpty) {                                                  // Allow filtering employees by position
           stdout.write("There're no employees with the position $position\n");  // or salary range when displaying the report
